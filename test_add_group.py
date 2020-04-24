@@ -34,7 +34,9 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_link_text("group page").click()
 
     def add_new_group(self, wd, group):
+        # Нажимаем кнопку создания группы
         wd.find_element_by_name("new").click()
+        # Заполняем поля
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
         wd.find_element_by_name("group_name").send_keys(group.name)
@@ -44,6 +46,7 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("group_footer").click()
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys(group.footer)
+        # Поджтверждаем создание группы
         wd.find_element_by_name("submit").click()
 
     def open_group_page(self, wd):
@@ -53,12 +56,15 @@ class TestAddGroup(unittest.TestCase):
         wd.get("http://localhost/addressbook/")
 
     def login(self, wd, username, password):
+        # Заполняем поле логин
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
+        # Заполняем поле пароль
         wd.find_element_by_name("pass").click()
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys(password)
+        # Нажимаем кнопку логина
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def tearDown(self):
