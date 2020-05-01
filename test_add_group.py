@@ -13,20 +13,14 @@ class TestAddGroup(unittest.TestCase):
 
     def test_add_group(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_group_page(wd)
         self.add_new_group(wd, Group(name="TEST", header="TEST_1.1", footer="TEST_1.2"))
-        self.return_to_group_page(wd)
         self.logout(wd)
 
     def test_add_empty_group(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_group_page(wd)
         self.add_new_group(wd, Group(name="", header="", footer=""))
-        self.return_to_group_page(wd)
         self.logout(wd)
 
     def logout(self, wd):
@@ -36,6 +30,7 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_link_text("group page").click()
 
     def add_new_group(self, wd, group):
+        self.open_group_page(wd)
         # Нажимаем кнопку создания группы
         wd.find_element_by_name("new").click()
         # Заполняем поля
@@ -50,6 +45,7 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("group_footer").send_keys(group.footer)
         # Поджтверждаем создание группы
         wd.find_element_by_name("submit").click()
+        self.return_to_group_page(wd)
 
     def open_group_page(self, wd):
         wd.find_element_by_link_text("groups").click()
@@ -58,6 +54,7 @@ class TestAddGroup(unittest.TestCase):
         wd.get("http://localhost/addressbook/")
 
     def login(self, wd, username, password):
+        self.open_home_page(wd)
         # Заполняем поле логин
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
