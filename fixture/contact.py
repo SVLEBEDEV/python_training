@@ -8,6 +8,8 @@ class ContactHelper:
 
     def return_to_home_page(self):
         wd = self.app.wd
+        if wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("searchstring")) > 0:
+            return
         wd.find_element_by_link_text("home page").click()
 
     def create(self, contact):
@@ -50,7 +52,6 @@ class ContactHelper:
         if text is not None:
             wd.find_element_by_name(field_name).click()
             Select(wd.find_element_by_name(field_name)).select_by_visible_text(text)
-            wd.find_element_by_xpath("//option[@value='" + text + "']").click()
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
@@ -61,11 +62,13 @@ class ContactHelper:
 
     def open_new_contact_page(self):
         wd = self.app.wd
+        if wd.current_url.endswith("/edit.php") and len(wd.find_elements_by_name("submit")) > 0:
+            return
         wd.find_element_by_link_text("add new").click()
 
     def delete_first(self):
         wd = self.app.wd
-        self.go_home_page()
+        self.open_home_page()
         self.select_first()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
@@ -76,18 +79,20 @@ class ContactHelper:
 
     def edit_first(self, new_group_data):
         wd = self.app.wd
-        self.go_home_page()
+        self.open_home_page()
         self.select_first()
         wd.find_element_by_xpath('//img[@alt="Edit"]').click()
         self.form_filling(new_group_data)
         wd.find_element_by_name('update').click()
         self.return_to_home_page()
 
-    def go_home_page(self):
+    def open_home_page(self):
         wd = self.app.wd
+        if wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("searchstring")) > 0:
+            return
         wd.find_element_by_link_text("home").click()
 
     def count(self):
         wd = self.app.wd
-        self.go_home_page()
+        self.open_home_page()
         return len(wd.find_elements_by_name('selected[]'))
