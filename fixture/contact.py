@@ -102,9 +102,9 @@ class ContactHelper:
         self.open_home_page()
         contacts = []
         for el in wd.find_elements_by_xpath('//tr[@name="entry"]'):
-            First_name = el.find_elements_by_css_selector('td')[1]
-            Last_name = el.find_elements_by_css_selector('td')[2]
-            id = el.find_element_by_xpath('//td[@class="center"]/input[@type="checkbox"]').get_attribute('value')
+            First_name = el.find_elements_by_css_selector('td')[1].text
+            Last_name = el.find_elements_by_css_selector('td')[2].text
+            id = el.find_element_by_css_selector('input').get_attribute('id')
             contacts.append(Contact(First_name=First_name, Last_name=Last_name, id=id))
         return contacts
 
