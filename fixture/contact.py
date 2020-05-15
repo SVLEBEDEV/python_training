@@ -1,5 +1,7 @@
-from selenium.webdriver.support.ui import Select
+from time import sleep
 
+from selenium.webdriver.support.ui import Select
+from model.contact import Contact
 
 class ContactHelper:
 
@@ -96,3 +98,16 @@ class ContactHelper:
         wd = self.app.wd
         self.open_home_page()
         return len(wd.find_elements_by_name('selected[]'))
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.open_home_page()
+        contacts = []
+        sleep(1)
+        for el in wd.find_elements_by_xpath('//tr[@name="entry"]'):
+            First_name = el.find_elements_by_css_selector('td')[1]
+            Last_name = el.find_elements_by_css_selector('td')[2]
+            id = el.find_element_by_xpath('//td[@class="center"]/input[@type="checkbox"]').get_attribute('value')
+            contacts.append(Contact(First_name=First_name, Last_name=Last_name, id=id))
+        return contacts
+

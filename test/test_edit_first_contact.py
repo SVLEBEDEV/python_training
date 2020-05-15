@@ -24,4 +24,7 @@ def test_edit_first_contact(app):
                                Address_Secondary="-",
                                Home_Secondary="-",
                                Notes="-"))
+    old_contacts = app.contact.get_contact_list()
     app.contact.edit_first(Contact(First_name="EDIT", Birthday_day="15"))
+    new_contacts = app.contact.get_contact_list()
+    assert len(old_contacts) == len(new_contacts)
