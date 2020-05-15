@@ -1,5 +1,3 @@
-from time import sleep
-
 from selenium.webdriver.support.ui import Select
 from model.contact import Contact
 
@@ -103,7 +101,6 @@ class ContactHelper:
         wd = self.app.wd
         self.open_home_page()
         contacts = []
-        sleep(1)
         for el in wd.find_elements_by_xpath('//tr[@name="entry"]'):
             First_name = el.find_elements_by_css_selector('td')[1]
             Last_name = el.find_elements_by_css_selector('td')[2]

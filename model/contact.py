@@ -30,3 +30,9 @@ class Contact:
         self.Home_Secondary = Home_Secondary
         self.Notes = Notes
         self.id = id
+
+    def __repr__(self):
+        return '%s : %s - %s' % (self.id, self.First_name, self.Last_name)
+
+    def __eq__(self, other):
+        return self.id == other.id and self.First_name == other.First_name and self.Last_name == other.Last_name
