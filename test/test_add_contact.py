@@ -11,9 +11,9 @@ def test_add_contact(app):
                         Title="test4",
                         Company="test5",
                         Address="SPB",
-                        Home="111-11-11",
-                        Mobile="+7(111)111-11-11",
-                        Work="222-22-22",
+                        Home="12345",
+                        Mobile="12345",
+                        Work="12345",
                         Fax="-",
                         E_mail="111@mail.ru",
                         E_mail2="-",
@@ -22,7 +22,7 @@ def test_add_contact(app):
                         Birthday_day="2", Birthday_month="January", Birthday_year="1993",
                         Anniversary_day="15", Anniversary_month="December", Anniversary_year="2001",
                         Address_Secondary="-",
-                        Home_Secondary="-",
+                        Home_Secondary="12345",
                         Notes="-")
     app.contact.create(contact)
     assert len(old_contacts) + 1 == app.contact.count()

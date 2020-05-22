@@ -1,3 +1,4 @@
+import re
 from selenium.webdriver.support.ui import Select
 from model.contact import Contact
 
@@ -87,9 +88,7 @@ class ContactHelper:
 
     def edit_by_index(self, index, new_group_data):
         wd = self.app.wd
-        self.open_home_page()
-        self.select_by_index(index)
-        wd.find_elements_by_xpath('//img[@alt="Edit"]')[index].click()
+        self.open_edit_by_index(index)
         self.form_filling(new_group_data)
         wd.find_element_by_name('update').click()
         self.return_to_home_page()
@@ -119,7 +118,57 @@ class ContactHelper:
             for el in wd.find_elements_by_xpath('//tr[@name="entry"]'):
                 Last_name = el.find_elements_by_css_selector('td')[1].text
                 First_name = el.find_elements_by_css_selector('td')[2].text
+                all_phones = el.find_elements_by_css_selector('td')[5].text.splitlines()
                 id = el.find_element_by_css_selector('input').get_attribute('id')
-                self.contact_cache.append(Contact(First_name=First_name, Last_name=Last_name, id=id))
+                self.contact_cache.append(Contact(First_name=First_name,
+                                                  Last_name=Last_name,
+                                                  id=id,
+                                                  Home=all_phones[0],
+                                                  Mobile=all_phones[1],
+                                                  Work=all_phones[2],
+                                                  Home_Secondary=all_phones[3]))
         return list(self.contact_cache)
+
+    def open_details_by_index(self, index):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_by_index(index)
+        wd.find_elements_by_xpath('//img[@title="Details"]')[index].click()
+
+    def open_edit_by_index(self, index):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_by_index(index)
+        wd.find_elements_by_xpath('//img[@alt="Edit"]')[index].click()
+
+    def get_contact_info_from_edit_page(self, index):
+        wd = self.app.wd
+        self.open_edit_by_index(index)
+        Last_name = wd.find_element_by_name('firstname').get_attribute('value')
+        First_name = wd.find_element_by_name('lastname').get_attribute('value')
+        id = wd.find_element_by_name('id').get_attribute('value')
+        Home = wd.find_element_by_name('home').get_attribute('value')
+        Mobile = wd.find_element_by_name('mobile').get_attribute('value')
+        Work = wd.find_element_by_name('work').get_attribute('value')
+        Home_Secondary = wd.find_element_by_name('phone2').get_attribute('value')
+        return Contact(Last_name=Last_name,
+                       First_name=First_name,
+                       id=id,
+                       Home=Home,
+                       Mobile=Mobile,
+                       Work=Work,
+                       Home_Secondary=Home_Secondary)
+
+    def get_contact_from_view_page(self, index):
+        wd = self.app.wd
+        self.open_details_by_index(index)
+        text = wd.find_element_by_id('content').text
+        Home = re.search("H: (.*)", text).group(1)
+        Mobile = re.search("M: (.*)", text).group(1)
+        Work = re.search("W: (.*)", text).group(1)
+        Home_Secondary = re.search("P: (.*)", text).group(1)
+        return Contact(Home=Home,
+                       Mobile=Mobile,
+                       Work=Work,
+                       Home_Secondary=Home_Secondary)
 
