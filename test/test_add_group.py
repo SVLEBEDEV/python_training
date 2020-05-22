@@ -1,10 +1,24 @@
 # -*- coding: utf-8 -*-
+import pytest
 from model.group import Group
+import random
+import string
 
 
-def test_add_group(app):
+def random_string(prefix, maxlen):
+    symbols = string.ascii_letters + string.digits + ' '*10
+    return prefix + ''.join([random.choice(symbols) for i in range(random.randrange(maxlen))])
+
+
+TestData = [
+    Group(name=random_string('name', 5), header=random_string('header', 10), footer=random_string('footer', 15)),
+    Group(name="", header="", footer="")
+]
+
+
+@pytest.mark.parametrize('group', TestData, ids=[repr(x) for x in TestData])
+def test_add_group(app, group):
     old_groups = app.group.get_group_list()
-    group = Group(name="1", header="TEST_1.1", footer="TEST_1.2")
     app.group.create(group)
     assert len(old_groups) + 1 == app.group.count()
     new_groups = app.group.get_group_list()
