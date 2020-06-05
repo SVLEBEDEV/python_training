@@ -1,9 +1,8 @@
-from random import randrange
 from model.contact import Contact
 import re
 
 
-def test_check_contact(app):
+def test_check_contact(app, db):
     if app.contact.count() == 0:
         app.contact.create(Contact(First_name="test",
                                Middle_name="test1",
@@ -25,14 +24,10 @@ def test_check_contact(app):
                                Address_Secondary="-",
                                Home_Secondary="12345",
                                Notes="-"))
-    index = randrange(app.contact.count())
-    contact_from_home_page = app.contact.get_contact_list()[index]
-    contact_from_edit_page = app.contact.get_contact_info_from_edit_page(index)
-    assert contact_from_home_page.Last_name == contact_from_edit_page.Last_name
-    assert contact_from_home_page.First_name == contact_from_edit_page.First_name
-    assert contact_from_home_page.Address == contact_from_edit_page.Address
-    assert contact_from_home_page.all_phones_from_home_page == merge_phones_like_on_home_page(contact_from_edit_page)
-    assert contact_from_home_page.all_mail_from_home_page == merge_mail_like_on_home_page(contact_from_edit_page)
+    contact_from_home_page = sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
+    contact_from_db = sorted(db.get_contact_list(), key=Contact.id_or_max)
+    for i in range(len(contact_from_home_page)):
+        assert contact_from_home_page[i] == contact_from_db[i]
 
 
 def clear(s):

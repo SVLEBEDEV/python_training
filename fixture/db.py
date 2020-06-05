@@ -30,10 +30,12 @@ class DBficture:
         try:
             cursor.execute('select id, firstname, middlename, lastname, nickname, company, title, address, home, mobile, '
                            'work, fax, email, email2, email3, homepage, bday, bmonth, byear, aday, amonth, ayear, '
-                           'address2, phone2, notes from addressbook')
+                           'address2, phone2, notes from addressbook where deprecated = "0000-00-00 00:00:00"')
             for row in cursor:
                 (id, firstname, middlename, lastname, nickname, company, title, address, home, mobile, work, fax,
                  email, email2, email3, homepage, bday, bmonth, byear, aday, amonth, ayear, address2, phone2, notes) = row
+                all_mail = home + mobile + work + phone2
+                all_phones = email + email2 + email3
                 list_contacts.append(Contact(id=str(id),
                                              First_name=firstname,
                                              Middle_name=middlename,
@@ -54,7 +56,9 @@ class DBficture:
                                              Anniversary_day=aday, Anniversary_month=amonth, Anniversary_year=ayear,
                                              Address_Secondary=address2,
                                              Home_Secondary=phone2,
-                                             Notes=notes))
+                                             Notes=notes,
+                                             all_mail_from_home_page=all_mail,
+                                             all_phones_from_home_page=all_phones))
         finally:
             cursor.close()
         return list_contacts
