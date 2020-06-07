@@ -1,18 +1,14 @@
 from model.contact import Contact
 from model.group import Group
-from fixture.orm import ORMFixture
 
 
-orm = ORMFixture(host='127.0.0.1', name='addressbook', user='root', password='')
-
-
-def test_add_random_contact_to_random_group(app, db):
+def test_add_random_contact_to_random_group(app, orm):
     contact = None
     add_to_group = None
-    all_groups = db.get_group_list()
+    all_groups = orm.get_group_list()
     if len(all_groups) == 0:
         app.group.create(Group(name="1", header="TEST_1.1", footer="TEST_1.2"))
-        all_groups = db.get_group_list()
+        all_groups = orm.get_group_list()
     for group in all_groups:
         contacts = orm.get_contacts_not_in_group(group)
         if len(contacts) > 0:
@@ -40,7 +36,7 @@ def test_add_random_contact_to_random_group(app, db):
                                    Address_Secondary="-",
                                    Home_Secondary="12345",
                                    Notes="-"))
-        contacts = sorted(db.get_contact_list(), key=Contact.id_or_max)
+        contacts = sorted(orm.get_contact_list(), key=Contact.id_or_max)
         contact = contacts[len(contacts)-1]
     old_list_contacts = orm.get_contacts_in_group(add_to_group)
     app.contact.add_random_contact_to_random_group(contact, add_to_group)

@@ -1,27 +1,23 @@
 import random
 from model.contact import Contact
 from model.group import Group
-from fixture.orm import ORMFixture
 
 
-orm = ORMFixture(host='127.0.0.1', name='addressbook', user='root', password='')
-
-
-def test_del_random_contact_to_random_group(app, db):
+def test_del_random_contact_to_random_group(app, orm):
     contact = None
     add_to_group = None
-    all_groups = db.get_group_list()
+    all_groups = orm.get_group_list()
     if len(all_groups) == 0:
         app.group.create(Group(name="1", header="TEST_1.1", footer="TEST_1.2"))
-        app.contact.add_random_contact_to_random_group(random.choice(db.get_contact_list()), random.choice(db.get_group_list()))
-        all_groups = db.get_group_list()
+        app.contact.add_random_contact_to_random_group(random.choice(orm.get_contact_list()), random.choice(orm.get_group_list()))
+        all_groups = orm.get_group_list()
     for group in all_groups:
         contacts = orm.get_contacts_in_group(group)
         if len(contacts) > 0:
             contact = contacts[0]
             add_to_group = group
             break
-    if contact is None and db.get_contact_list() == 0:
+    if contact is None and orm.get_contact_list() == 0:
         app.contact.create(Contact(First_name="test",
                                    Middle_name="test1",
                                    Last_name="test2",
@@ -42,12 +38,12 @@ def test_del_random_contact_to_random_group(app, db):
                                    Address_Secondary="-",
                                    Home_Secondary="12345",
                                    Notes="-"))
-        contact = db.get_contact_list()[0]
-        add_to_group = random.choice(db.get_group_list())
+        contact = orm.get_contact_list()[0]
+        add_to_group = random.choice(orm.get_group_list())
         app.contact.add_random_contact_to_random_group(contact, add_to_group)
-    elif contact is None and db.get_contact_list() != 0:
-        contact = random.choice(db.get_contact_list())
-        add_to_group = random.choice(db.get_group_list())
+    elif contact is None and orm.get_contact_list() != 0:
+        contact = random.choice(orm.get_contact_list())
+        add_to_group = random.choice(orm.get_group_list())
         app.contact.add_random_contact_to_random_group(contact, add_to_group)
     old_list_contacts = orm.get_contacts_in_group(add_to_group)
     app.contact.del_random_contact_to_random_group(contact, add_to_group)

@@ -5,6 +5,7 @@ import os.path
 import importlib
 from fixture.application import Application
 from fixture.db import DBficture
+from fixture.orm import ORMFixture
 
 fixture = None
 target = None
@@ -17,6 +18,7 @@ def load_config(file):
         with open(config_file) as f:
             target = json.load(f)
     return target
+
 
 @pytest.fixture
 def app(request):
@@ -39,6 +41,13 @@ def db(request):
     return dbfixtute
 
 
+@pytest.fixture(scope='session')
+def orm(request):
+    orm_config = load_config(request.config.getoption('--target'))['db']
+    ormfixtute = ORMFixture(host=orm_config['host'], name=orm_config['name'], user=orm_config['user'], password=orm_config['password'])
+    return ormfixtute
+
+
 @pytest.fixture(scope='session', autouse=True)
 def stop(request):
     def fin():
@@ -47,10 +56,10 @@ def stop(request):
     request.addfinalizer(fin)
     return fixture
 
+
 @pytest.fixture
 def check_ui(request):
     return request.config.getoption('--check_ui')
-
 
 
 def pytest_addoption(parser):
