@@ -1,0 +1,11 @@
+[ {
+  "uid" : "8dfb9260a11c67fd",
+  "name" : "test_add_group[None : name KH : headerwAn 3 : footer A5GQBTG5 v46]",
+  "time" : {
+    "start" : 1593168614489,
+    "stop" : 1593168617230,
+    "duration" : 2741
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

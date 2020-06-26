@@ -1,0 +1,18 @@
+{
+  "uid" : "b1a8273437954620fa374b796ffaacdd",
+  "name" : "behaviors",
+  "children" : [ {
+    "name" : "test_add_group[None : name KH : headerwAn 3 : footer A5GQBTG5 v46]",
+    "uid" : "8dfb9260a11c67fd",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "passed",
+    "time" : {
+      "start" : 1593168614489,
+      "stop" : 1593168617230,
+      "duration" : 2741
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ "None : name KH : headerwAn 3 : footer A5GQBTG5 v46" ]
+  } ]
+}
