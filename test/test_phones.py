@@ -1,6 +1,7 @@
 from model.contact import Contact
 import re
 
+
 def test_phones_on_home_page(app):
     if app.contact.count() == 0:
         app.contact.create(Contact(First_name="test",
