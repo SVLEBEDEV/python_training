@@ -87,6 +87,7 @@ class ContactHelper:
         self.select_by_id(id)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
+        sleep(2)
         self.contact_cache = None
 
     def select_by_index(self, index):
