@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 2.9 (Python 3.8.3 on win32)" generated="20200701 16:09:13.918">
+<suite id="s1" name="Group Scenarios" source="C:\Users\79111\Desktop\python_training\GIT\rf\group_scenarios.robot">
+<kw name="Init Fixtures" library="rf.AddressBook" type="setup">
+<status status="PASS" starttime="20200701 16:09:14.230" endtime="20200701 16:09:23.775"></status>
+</kw>
+<test id="s1-t1" name="Edit group">
+<kw name="Get Group List" library="rf.AddressBook">
+<assign>
+<var>${old_list}</var>
+</assign>
+<msg timestamp="20200701 16:09:23.782" level="INFO">${old_list} = [204 : 1 : TEST_1.1 : TEST_1.2, 205 : name KH : headerwAn 3 : footer A5GQBTG5 v46, 206 : name KH : headerwAn 3 : footer A5GQBTG5 v46, 207 : edit_name1 : edit_header1 : edit_footer1, 208 : name KH : he...</msg>
+<status status="PASS" starttime="20200701 16:09:23.777" endtime="20200701 16:09:23.783"></status>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<arguments>
+<arg>${old_list}</arg>
+</arguments>
+<assign>
+<var>${len}</var>
+</assign>
+<msg timestamp="20200701 16:09:23.784" level="INFO">Length is 48</msg>
+<msg timestamp="20200701 16:09:23.784" level="INFO">${len} = 48</msg>
+<status status="PASS" starttime="20200701 16:09:23.783" endtime="20200701 16:09:23.784"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>random.randrange(${len})</arg>
+<arg>random</arg>
+</arguments>
+<assign>
+<var>${index}</var>
+</assign>
+<msg timestamp="20200701 16:09:23.799" level="INFO">${index} = 13</msg>
+<status status="PASS" starttime="20200701 16:09:23.785" endtime="20200701 16:09:23.799"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${old_list}</arg>
+<arg>${index}</arg>
+</arguments>
+<assign>
+<var>${group}</var>
+</assign>
+<msg timestamp="20200701 16:09:23.801" level="INFO">${group} = 217 : nameQ : headerQ : footer nGMdmm Gqv</msg>
+<status status="PASS" starttime="20200701 16:09:23.799" endtime="20200701 16:09:23.801"></status>
+</kw>
+<kw name="New Group" library="rf.AddressBook">
+<arguments>
+<arg>edit_name1</arg>
+<arg>edit_header1</arg>
+<arg>edit_footer1</arg>
+</arguments>
+<assign>
+<var>${edit_group}</var>
+</assign>
+<msg timestamp="20200701 16:09:23.801" level="INFO">${edit_group} = None : edit_name1 : edit_header1 : edit_footer1</msg>
+<status status="PASS" starttime="20200701 16:09:23.801" endtime="20200701 16:09:23.802"></status>
+</kw>
+<kw name="Edit Group" library="rf.AddressBook">
+<arguments>
+<arg>${group}</arg>
+<arg>${edit_group}</arg>
+</arguments>
+<status status="PASS" starttime="20200701 16:09:23.802" endtime="20200701 16:09:26.793"></status>
+</kw>
+<kw name="Get Group List" library="rf.AddressBook">
+<assign>
+<var>${new_list}</var>
+</assign>
+<msg timestamp="20200701 16:09:26.799" level="INFO">${new_list} = [204 : 1 : TEST_1.1 : TEST_1.2, 205 : name KH : headerwAn 3 : footer A5GQBTG5 v46, 206 : name KH : headerwAn 3 : footer A5GQBTG5 v46, 207 : edit_name1 : edit_header1 : edit_footer1, 208 : name KH : he...</msg>
+<status status="PASS" starttime="20200701 16:09:26.794" endtime="20200701 16:09:26.799"></status>
+</kw>
+<kw name="Remove Values From List" library="Collections">
+<doc>Removes all occurrences of given ``values`` from ``list``.</doc>
+<arguments>
+<arg>${old_list}</arg>
+<arg>${group}</arg>
+</arguments>
+<status status="PASS" starttime="20200701 16:09:26.799" endtime="20200701 16:09:26.800"></status>
+</kw>
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${new_list}</arg>
+<arg>${index}</arg>
+</arguments>
+<assign>
+<var>${edit_group}</var>
+</assign>
+<msg timestamp="20200701 16:09:26.801" level="INFO">${edit_group} = 217 : edit_name1 : edit_header1 : edit_footer1</msg>
+<status status="PASS" starttime="20200701 16:09:26.800" endtime="20200701 16:09:26.801"></status>
+</kw>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${old_list}</arg>
+<arg>${edit_group}</arg>
+</arguments>
+<status status="PASS" starttime="20200701 16:09:26.801" endtime="20200701 16:09:26.801"></status>
+</kw>
+<kw name="Group Lists Should Be Equal" library="rf.AddressBook">
+<arguments>
+<arg>${new_list}</arg>
+<arg>${old_list}</arg>
+</arguments>
+<status status="PASS" starttime="20200701 16:09:26.801" endtime="20200701 16:09:26.802"></status>
+</kw>
+<status status="PASS" starttime="20200701 16:09:23.775" endtime="20200701 16:09:26.802" critical="yes"></status>
+</test>
+<kw name="Destroy Fixtures" library="rf.AddressBook" type="teardown">
+<status status="PASS" starttime="20200701 16:09:26.803" endtime="20200701 16:09:28.045"></status>
+</kw>
+<status status="PASS" starttime="20200701 16:09:13.920" endtime="20200701 16:09:28.045"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="Group Scenarios">Group Scenarios</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

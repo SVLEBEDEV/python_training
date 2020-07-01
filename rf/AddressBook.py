@@ -7,7 +7,7 @@ from model.group import Group
 
 class AddressBook:
 
-    ROBOT_LIBRARY_SCOPE = 'TEST SUIT'
+    ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
 
     def __init__(self, config="target.json", browser="firefox"):
         self.browser = browser
@@ -37,6 +37,10 @@ class AddressBook:
 
     def delete_group(self, group):
         self.fixture.group.delete_by_id(group.id)
+
+    def edit_group(self, group, new_group_data):
+        new_group_data.id = group.id
+        self.fixture.group.edit_by_id(new_group_data)
     
     def group_lists_should_be_equal(self, list1, list2):
         assert sorted(list1, key=Group.id_or_max) == sorted(list2, key=Group.id_or_max)

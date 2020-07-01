@@ -16,10 +16,34 @@ Add new group
 
 Delete group
     ${old_list}=  Get Group List
-    ${len}= Get Length  ${old_list}
-    ${index}=  Evaluate random.randrange(${len})  random
+    ${len}=  Get Length  ${old_list}
+    ${index}=  Evaluate  random.randrange(${len})  random
     ${group}=  Get From List  ${old_list}  ${index}
     Delete Group  ${group}
     ${new_list}=  Get Group List
     Remove Values From List  ${old_list}  ${group}
     Group Lists Should Be Equal  ${new_list}  ${old_list}
+
+Edit group
+    #Получаем изначальный список групп
+    ${old_list}=  Get Group List
+    #Выбираем рандомно группу
+    ${len}=  Get Length  ${old_list}
+    ${index}=  Evaluate  random.randrange(${len})  random
+    ${group}=  Get From List  ${old_list}  ${index}
+    #Создаем группу для изменения
+    ${edit_group}=  New Group  edit_name1  edit_header1  edit_footer1
+    #Изменияем группу
+    Edit Group  ${group}  ${edit_group}
+    #Получаем новый список групп
+    ${new_list}=  Get Group List
+    #Удаляем старую группу
+    Remove Values From List  ${old_list}  ${group}
+    #Добавляем измененную группу
+    ${edit_group}=  Get From List  ${new_list}  ${index}
+    Append To List  ${old_list}  ${edit_group}
+    #Сравниваем списки
+    Group Lists Should Be Equal  ${new_list}  ${old_list}
+
+
+
