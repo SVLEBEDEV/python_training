@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 2.9 (Python 3.8.3 on win32)" generated="20200701 16:09:13.918">
-<suite id="s1" name="Group Scenarios" source="C:\Users\79111\Desktop\python_training\GIT\rf\group_scenarios.robot">
+<robot generator="Robot 2.9 (Python 3.8.3 on win32)" generated="20200701 16:27:44.657">
+<suite id="s1" name="Contact Scenarios" source="C:\Users\79111\Desktop\python_training\GIT\rf\contact_scenarios.robot">
 <kw name="Init Fixtures" library="rf.AddressBook" type="setup">
-<status status="PASS" starttime="20200701 16:09:14.230" endtime="20200701 16:09:23.775"></status>
+<status status="PASS" starttime="20200701 16:27:44.987" endtime="20200701 16:27:55.130"></status>
 </kw>
-<test id="s1-t1" name="Edit group">
-<kw name="Get Group List" library="rf.AddressBook">
+<test id="s1-t1" name="Edit contact">
+<kw name="Get Contact List" library="rf.AddressBook">
 <assign>
 <var>${old_list}</var>
 </assign>
-<msg timestamp="20200701 16:09:23.782" level="INFO">${old_list} = [204 : 1 : TEST_1.1 : TEST_1.2, 205 : name KH : headerwAn 3 : footer A5GQBTG5 v46, 206 : name KH : headerwAn 3 : footer A5GQBTG5 v46, 207 : edit_name1 : edit_header1 : edit_footer1, 208 : name KH : he...</msg>
-<status status="PASS" starttime="20200701 16:09:23.777" endtime="20200701 16:09:23.783"></status>
+<msg timestamp="20200701 16:27:55.139" level="INFO">${old_list} = [First_nameGME ; Middle_nameBqY ; Last_name ; NicknameD ; TitleizUF ; Companyj ; AddressIze ; 855587842 ; 365073 ; 445777 ; www.HomepageMAz.ru ; Nr ; bXQ ; U0T ; 55993 ; 2 ; January ; 1993 ; 15 ; Dece...</msg>
+<status status="PASS" starttime="20200701 16:27:55.131" endtime="20200701 16:27:55.139"></status>
 </kw>
 <kw name="Get Length" library="BuiltIn">
 <doc>Returns and logs the length of the given item as an integer.</doc>
@@ -20,9 +20,9 @@
 <assign>
 <var>${len}</var>
 </assign>
-<msg timestamp="20200701 16:09:23.784" level="INFO">Length is 48</msg>
-<msg timestamp="20200701 16:09:23.784" level="INFO">${len} = 48</msg>
-<status status="PASS" starttime="20200701 16:09:23.783" endtime="20200701 16:09:23.784"></status>
+<msg timestamp="20200701 16:27:55.140" level="INFO">Length is 16</msg>
+<msg timestamp="20200701 16:27:55.141" level="INFO">${len} = 16</msg>
+<status status="PASS" starttime="20200701 16:27:55.139" endtime="20200701 16:27:55.141"></status>
 </kw>
 <kw name="Evaluate" library="BuiltIn">
 <doc>Evaluates the given expression in Python and returns the results.</doc>
@@ -33,8 +33,8 @@
 <assign>
 <var>${index}</var>
 </assign>
-<msg timestamp="20200701 16:09:23.799" level="INFO">${index} = 13</msg>
-<status status="PASS" starttime="20200701 16:09:23.785" endtime="20200701 16:09:23.799"></status>
+<msg timestamp="20200701 16:27:55.158" level="INFO">${index} = 11</msg>
+<status status="PASS" starttime="20200701 16:27:55.141" endtime="20200701 16:27:55.158"></status>
 </kw>
 <kw name="Get From List" library="Collections">
 <doc>Returns the value specified with an ``index`` from ``list``.</doc>
@@ -43,44 +43,65 @@
 <arg>${index}</arg>
 </arguments>
 <assign>
-<var>${group}</var>
+<var>${contact}</var>
 </assign>
-<msg timestamp="20200701 16:09:23.801" level="INFO">${group} = 217 : nameQ : headerQ : footer nGMdmm Gqv</msg>
-<status status="PASS" starttime="20200701 16:09:23.799" endtime="20200701 16:09:23.801"></status>
+<msg timestamp="20200701 16:27:55.159" level="INFO">${contact} = First_namebns ; Middle_namewX ; Last_namehyF ; Nicknamecy ; Title ; CompanyfwN ; Addressk ; +76141945609 ; +77977554767 ; +77022297221 ; www.HomepageA.ru ; @mail.ru ; L@mail.ru ; z@mail.ru ; +73477236...</msg>
+<status status="PASS" starttime="20200701 16:27:55.158" endtime="20200701 16:27:55.159"></status>
 </kw>
-<kw name="New Group" library="rf.AddressBook">
+<kw name="New Contact" library="rf.AddressBook">
 <arguments>
-<arg>edit_name1</arg>
-<arg>edit_header1</arg>
-<arg>edit_footer1</arg>
+<arg>EDIT</arg>
+<arg>EDIT</arg>
+<arg>Last_namehyF</arg>
+<arg>Nicknamecy</arg>
+<arg>Title</arg>
+<arg>CompanyfwN</arg>
+<arg>Addressk</arg>
+<arg>+76141945609</arg>
+<arg>+77977554767</arg>
+<arg>+77022297221</arg>
+<arg>+73477236564</arg>
+<arg>1@mail.ru</arg>
+<arg>L@mail.ru</arg>
+<arg>z@mail.ru</arg>
+<arg>www.HomepageA.ru</arg>
+<arg>24</arg>
+<arg>February</arg>
+<arg>1954</arg>
+<arg>18</arg>
+<arg>March</arg>
+<arg>1914</arg>
+<arg>Address_SecondaryFJ</arg>
+<arg>+71274410888</arg>
+<arg>NotesYF&gt;</arg>
 </arguments>
 <assign>
-<var>${edit_group}</var>
+<var>${edit_contact}</var>
 </assign>
-<msg timestamp="20200701 16:09:23.801" level="INFO">${edit_group} = None : edit_name1 : edit_header1 : edit_footer1</msg>
-<status status="PASS" starttime="20200701 16:09:23.801" endtime="20200701 16:09:23.802"></status>
+<msg timestamp="20200701 16:27:55.161" level="INFO">${edit_contact} = EDIT ; EDIT ; Last_namehyF ; Nicknamecy ; Title ; CompanyfwN ; Addressk ; +76141945609 ; +77977554767 ; +77022297221 ; +73477236564 ; 1@mail.ru ; L@mail.ru ; z@mail.ru ; www.HomepageA.ru ; 24 ; Februa...</msg>
+<status status="PASS" starttime="20200701 16:27:55.160" endtime="20200701 16:27:55.161"></status>
 </kw>
-<kw name="Edit Group" library="rf.AddressBook">
+<kw name="Edit Contact" library="rf.AddressBook">
 <arguments>
-<arg>${group}</arg>
-<arg>${edit_group}</arg>
+<arg>${contact}</arg>
+<arg>${edit_contact}</arg>
 </arguments>
-<status status="PASS" starttime="20200701 16:09:23.802" endtime="20200701 16:09:26.793"></status>
+<status status="PASS" starttime="20200701 16:27:55.162" endtime="20200701 16:28:03.684"></status>
 </kw>
-<kw name="Get Group List" library="rf.AddressBook">
+<kw name="Get Contact List" library="rf.AddressBook">
 <assign>
 <var>${new_list}</var>
 </assign>
-<msg timestamp="20200701 16:09:26.799" level="INFO">${new_list} = [204 : 1 : TEST_1.1 : TEST_1.2, 205 : name KH : headerwAn 3 : footer A5GQBTG5 v46, 206 : name KH : headerwAn 3 : footer A5GQBTG5 v46, 207 : edit_name1 : edit_header1 : edit_footer1, 208 : name KH : he...</msg>
-<status status="PASS" starttime="20200701 16:09:26.794" endtime="20200701 16:09:26.799"></status>
+<msg timestamp="20200701 16:28:03.693" level="INFO">${new_list} = [First_nameGME ; Middle_nameBqY ; Last_name ; NicknameD ; TitleizUF ; Companyj ; AddressIze ; 855587842 ; 365073 ; 445777 ; www.HomepageMAz.ru ; Nr ; bXQ ; U0T ; 55993 ; 2 ; January ; 1993 ; 15 ; Dece...</msg>
+<status status="PASS" starttime="20200701 16:28:03.685" endtime="20200701 16:28:03.693"></status>
 </kw>
 <kw name="Remove Values From List" library="Collections">
 <doc>Removes all occurrences of given ``values`` from ``list``.</doc>
 <arguments>
 <arg>${old_list}</arg>
-<arg>${group}</arg>
+<arg>${contact}</arg>
 </arguments>
-<status status="PASS" starttime="20200701 16:09:26.799" endtime="20200701 16:09:26.800"></status>
+<status status="PASS" starttime="20200701 16:28:03.693" endtime="20200701 16:28:03.694"></status>
 </kw>
 <kw name="Get From List" library="Collections">
 <doc>Returns the value specified with an ``index`` from ``list``.</doc>
@@ -91,30 +112,30 @@
 <assign>
 <var>${edit_group}</var>
 </assign>
-<msg timestamp="20200701 16:09:26.801" level="INFO">${edit_group} = 217 : edit_name1 : edit_header1 : edit_footer1</msg>
-<status status="PASS" starttime="20200701 16:09:26.800" endtime="20200701 16:09:26.801"></status>
+<msg timestamp="20200701 16:28:03.696" level="INFO">${edit_group} = EDIT ; EDIT ; Last_namehyF ; Nicknamecy ; Title ; CompanyfwN ; Addressk ; +76141945609 ; +77977554767 ; +77022297221 ; www.HomepageA.ru ; 1@mail.ru ; L@mail.ru ; z@mail.ru ; +73477236564 ; 24 ; Februa...</msg>
+<status status="PASS" starttime="20200701 16:28:03.695" endtime="20200701 16:28:03.696"></status>
 </kw>
 <kw name="Append To List" library="Collections">
 <doc>Adds ``values`` to the end of ``list``.</doc>
 <arguments>
 <arg>${old_list}</arg>
-<arg>${edit_group}</arg>
+<arg>${edit_contact}</arg>
 </arguments>
-<status status="PASS" starttime="20200701 16:09:26.801" endtime="20200701 16:09:26.801"></status>
+<status status="PASS" starttime="20200701 16:28:03.696" endtime="20200701 16:28:03.697"></status>
 </kw>
 <kw name="Group Lists Should Be Equal" library="rf.AddressBook">
 <arguments>
 <arg>${new_list}</arg>
 <arg>${old_list}</arg>
 </arguments>
-<status status="PASS" starttime="20200701 16:09:26.801" endtime="20200701 16:09:26.802"></status>
+<status status="PASS" starttime="20200701 16:28:03.697" endtime="20200701 16:28:03.698"></status>
 </kw>
-<status status="PASS" starttime="20200701 16:09:23.775" endtime="20200701 16:09:26.802" critical="yes"></status>
+<status status="PASS" starttime="20200701 16:27:55.130" endtime="20200701 16:28:03.698" critical="yes"></status>
 </test>
 <kw name="Destroy Fixtures" library="rf.AddressBook" type="teardown">
-<status status="PASS" starttime="20200701 16:09:26.803" endtime="20200701 16:09:28.045"></status>
+<status status="PASS" starttime="20200701 16:28:03.699" endtime="20200701 16:28:06.248"></status>
 </kw>
-<status status="PASS" starttime="20200701 16:09:13.920" endtime="20200701 16:09:28.045"></status>
+<status status="PASS" starttime="20200701 16:27:44.659" endtime="20200701 16:28:06.248"></status>
 </suite>
 <statistics>
 <total>
@@ -124,7 +145,7 @@
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" id="s1" name="Group Scenarios">Group Scenarios</stat>
+<stat pass="1" fail="0" id="s1" name="Contact Scenarios">Contact Scenarios</stat>
 </suite>
 </statistics>
 <errors>
